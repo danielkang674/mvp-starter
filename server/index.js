@@ -16,18 +16,6 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../angular-client'));
 app.use(express.static(__dirname + '/../node_modules'));
 
-app.get('/items', (req, res) => {
-  model.selectAll((err, data) => {
-    if (err) {
-      console.log(err);
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
-});
-
-
 app.get('/vote', (req, res) => {
   getPizzaOptions((err, data) => {
     if (err) {

@@ -17,16 +17,6 @@ USE test;
 -- 
 -- ---
 
-DROP TABLE IF EXISTS `items`;
-
-CREATE TABLE items
-(
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar (50) NOT NULL,
-  PRIMARY KEY (ID)
-);
-
 DROP TABLE IF EXISTS `sizes`;
 		
 CREATE TABLE `sizes` (

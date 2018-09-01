@@ -5,17 +5,6 @@ const options = process.env.JAWSDB_URL || localOptions;
 
 const connection = mysql.createConnection(options);
 
-const selectAll = function (callback) {
-  connection.query('SELECT * FROM items', function (err, results, fields) {
-    if (err) {
-      console.log(err);
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
-};
-
 const saveSize = (size, cb) => {
   connection.query('INSERT INTO items (quantity, description) VALUES (?,?)', [1, size], (err, data, fields) => {
     if (err) {

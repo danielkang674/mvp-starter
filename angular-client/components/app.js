@@ -1,8 +1,5 @@
 angular.module('app')
   .controller('AppCtrl', ['itemsService', 'bye', 'pizzaService', 'getPizzaOptions', function (itemsService, bye, pizzaService, getPizzaOptions) {
-    itemsService.getAll((data) => {
-      this.items = data;
-    });
     itemsService.sayhi((hi) => {
       this.hi = hi;
     });
