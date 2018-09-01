@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS process.env.JAWSDB_DATABASE || test;
+DROP DATABASE IF EXISTS u4yd16p0ho7f8tgn;
 
-CREATE DATABASE process.env.JAWSDB_DATABASE || test;
+CREATE DATABASE u4yd16p0ho7f8tgn;
 
-USE process.env.JAWSDB_DATABASE || test;
+USE u4yd16p0ho7f8tgn;
 
 
 -- ---

@@ -7,7 +7,7 @@ const options = {
   port: process.env.JAWSDB_PORT
 };
 
-const connection = mysql.createConnection(options);
+const connection = mysql.createConnection(process.env.JAWSDB_URL);
 
 const saveSize = (size, cb) => {
   connection.query('INSERT INTO items (quantity, description) VALUES (?,?)', [1, size], (err, data, fields) => {
