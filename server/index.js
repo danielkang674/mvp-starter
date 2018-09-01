@@ -6,7 +6,7 @@ const { model } = require('../database-mysql');
 const { getPizzaOptions } = require('../helpers/pizzaOptions.js');
 
 const app = express();
-const port = process.env.HEROKU_PORT || 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
