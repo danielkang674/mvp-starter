@@ -1,21 +1,25 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
-// var items = require('../database-mongo');
+require('dotenv').config()
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const { model } = require('../database-mysql');
 
-var app = express();
 
-// UNCOMMENT FOR REACT
-// app.use(express.static(__dirname + '/../react-client/dist'));
+const app = express();
+const port = process.env.HEROKU_PORT || 3000;
 
-// UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
+// Middleware
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
+app.use(express.static(__dirname + '/../angular-client'));
+app.use(express.static(__dirname + '/../node_modules'));
+
+app.get('/items', (req, res) => {
+  model.selectAll((err, data) => {
+    if (err) {
+      console.log(err);
       res.sendStatus(500);
     } else {
       res.json(data);
@@ -23,7 +27,39 @@ app.get('/items', function (req, res) {
   });
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.get('/vote', (req, res) => {
+  let options = {};
+  model.getSizes((err, data) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      options.sizes = data;
+      model.getCrusts((err, crusts) => {
+        if (err) {
+          console.log(err);
+          res.sendStatus(500);
+        } else {
+          options.crusts = crusts;
+          res.json(options);
+        }
+      });
+    }
+  });
+});
+
+app.post('/vote', (req, res) => {
+  model.saveSize(req.body.size, (err, msg) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.status(200).send(msg);
+    }
+  });
+});
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}!`);
 });
 
