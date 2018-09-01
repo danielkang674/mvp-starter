@@ -9,8 +9,8 @@ angular.module('app')
     bye.saybye((bye) => {
       this.bye = bye;
     });
-    this.getSize = (size) => {
-      pizzaService.send(size);
+    this.getVote = (vote) => {
+      console.log(vote);
     };
     getPizzaOptions.getPizzaOptions((options) => {
       this.options = options;

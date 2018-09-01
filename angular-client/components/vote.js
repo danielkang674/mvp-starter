@@ -1,8 +1,15 @@
 angular.module('app')
   .component('vote', {
     bindings: {
-      options: '<'
+      options: '<',
+      getVote: '<'
     },
-    controller: function () { },
+    controller: function () {
+      this.data = {
+        size: null,
+        crust: null,
+        toppings: []
+      }
+    },
     templateUrl: '/templates/vote.html'
   });
