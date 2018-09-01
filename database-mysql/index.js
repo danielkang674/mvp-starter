@@ -1,11 +1,9 @@
 const mysql = require('mysql');
+const localOptions = { host: 'localhost', user: 'root', password: process.env.MYSQL_PASS, database: 'test' };
+const options = process.env.JAWSDB_URL || localOptions;
 
-const host = process.env.HEROKU_SQL || 'localhost';
-const user = process.env.HEROKU_USERMYSQL || 'root';
-const password = process.env.HEROKU_MYSQL_PASS || 'ahriel674';
-const database = process.env.HEROKU_MYSQL_DATABASE || 'test';
 
-var connection = mysql.createConnection({ host, user, password, database });
+const connection = mysql.createConnection(options);
 
 const selectAll = function (callback) {
   connection.query('SELECT * FROM items', function (err, results, fields) {
@@ -51,9 +49,9 @@ const getCrusts = (cb) => {
   });
 };
 
-const getToppings = (cb) =>{
-  connection.query('SELECT * FROM toppings', (err, results, fields) =>{
-    if(err){
+const getToppings = (cb) => {
+  connection.query('SELECT * FROM toppings', (err, results, fields) => {
+    if (err) {
       console.log(err);
       cb(err, null);
     } else {
