@@ -1,7 +1,10 @@
 const mysql = require('mysql');
-const localOptions = { host: 'localhost', user: 'root', password: process.env.MYSQL_PASS, database: 'test' };
-const options = process.env.JAWSDB_URL || localOptions;
-
+const options = {
+  host: process.env.JAWSDB_HOST || 'localhost',
+  user: process.env.JAWSDB_USERNAME || 'root',
+  password: process.env.JAWSDB_PASSWORD || process.env.MYSQL_PASS,
+  database: process.env.JAWSDB_DATABASE || 'test'
+};
 
 const connection = mysql.createConnection(options);
 
@@ -51,5 +54,3 @@ const getToppings = (cb) => {
 
 module.exports.model = { saveSize, getSizes, getCrusts, getToppings };
 
-
-// SELECT * FROM toppings AS t INNER JOIN crusts AS c ON t.id = c.id INNER JOIN sizes AS s ON t.id = s.id;
