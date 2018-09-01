@@ -4,6 +4,7 @@ const options = {
   user: process.env.JAWSDB_USERNAME || 'root',
   password: process.env.JAWSDB_PASSWORD || process.env.MYSQL_PASS,
   database: process.env.JAWSDB_DATABASE || 'test'
+  port: process.env.JAWSDB_PORT
 };
 
 const connection = mysql.createConnection(options);
