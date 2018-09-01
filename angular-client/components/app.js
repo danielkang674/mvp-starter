@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('AppCtrl', ['itemsService', 'bye', 'pizzaService', function (itemsService, bye, pizzaService) {
+  .controller('AppCtrl', ['itemsService', 'bye', 'pizzaService', 'getPizzaOptions', function (itemsService, bye, pizzaService, getPizzaOptions) {
     itemsService.getAll((data) => {
       this.items = data;
     });
@@ -12,6 +12,9 @@ angular.module('app')
     this.getSize = (size) => {
       pizzaService.send(size);
     };
+    getPizzaOptions.getPizzaOptions((options) => {
+      this.options = options;
+    });
   }])
   .component('app', {
     bindings: {},

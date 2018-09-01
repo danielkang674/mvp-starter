@@ -51,7 +51,18 @@ const getCrusts = (cb) => {
   });
 };
 
-module.exports.model = { selectAll, saveSize, getSizes, getCrusts };
+const getToppings = (cb) =>{
+  connection.query('SELECT * FROM toppings', (err, results, fields) =>{
+    if(err){
+      console.log(err);
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  });
+};
+
+module.exports.model = { selectAll, saveSize, getSizes, getCrusts, getToppings };
 
 
 // SELECT * FROM toppings AS t INNER JOIN crusts AS c ON t.id = c.id INNER JOIN sizes AS s ON t.id = s.id;

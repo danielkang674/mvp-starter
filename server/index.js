@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { model } = require('../database-mysql');
-
+const { getPizzaOptions } = require('../helpers/pizzaOptions.js');
 
 const app = express();
 const port = process.env.HEROKU_PORT || 3000;
@@ -27,23 +27,14 @@ app.get('/items', (req, res) => {
   });
 });
 
+
 app.get('/vote', (req, res) => {
-  let options = {};
-  model.getSizes((err, data) => {
+  getPizzaOptions((err, data) => {
     if (err) {
       console.log(err);
       res.sendStatus(500);
     } else {
-      options.sizes = data;
-      model.getCrusts((err, crusts) => {
-        if (err) {
-          console.log(err);
-          res.sendStatus(500);
-        } else {
-          options.crusts = crusts;
-          res.json(options);
-        }
-      });
+      res.json(data);
     }
   });
 });
