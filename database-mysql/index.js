@@ -1,13 +1,14 @@
 const mysql = require('mysql');
-const options = {
-  host: process.env.JAWSDB_HOST || 'localhost',
-  user: process.env.JAWSDB_USERNAME || 'root',
-  password: process.env.JAWSDB_PASSWORD || process.env.MYSQL_PASS,
-  database: process.env.JAWSDB_DATABASE || 'test',
-  port: process.env.JAWSDB_PORT
-};
+// const options = {
+//   host: process.env.JAWSDB_HOST || 'localhost',
+//   user: process.env.JAWSDB_USERNAME || 'root',
+//   password: process.env.JAWSDB_PASSWORD || process.env.MYSQL_PASS,
+//   database: process.env.JAWSDB_DATABASE || 'test',
+//   port: process.env.JAWSDB_PORT
+// };
+const options = process.env.JAWSDB_URL || { host: 'localhost', user: 'root', password: process.env.MYSQL_PASS, database: 'u4yd16p0ho7f8tgn' };
 
-const connection = mysql.createConnection(process.env.JAWSDB_URL);
+const connection = mysql.createConnection(options);
 
 const saveSize = (size, cb) => {
   connection.query('INSERT INTO items (quantity, description) VALUES (?,?)', [1, size], (err, data, fields) => {
