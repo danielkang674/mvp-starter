@@ -10,13 +10,13 @@ const options = process.env.JAWSDB_URL || { host: 'localhost', user: 'root', pas
 
 const connection = mysql.createConnection(options);
 
-const saveSize = (size, cb) => {
-  connection.query('INSERT INTO items (quantity, description) VALUES (?,?)', [1, size], (err, data, fields) => {
+const savePizza = (size, crust, cb) => {
+  connection.query('INSERT INTO pizzas (size_id, crust_id) VALUES (?,?)', [size, crust], (err, data, fields) => {
     if (err) {
       console.log(err);
       cb(err, null);
     } else {
-      cb(null, 'saved to db');
+      cb(null, data);
     }
   })
 };
@@ -54,5 +54,27 @@ const getToppings = (cb) => {
   });
 };
 
-module.exports.model = { saveSize, getSizes, getCrusts, getToppings };
+const getPizzas = (cb) => {
+  connection.query('SELECT * FROM pizzas', (err, results, fields) => {
+    if (err) {
+      console.log(err);
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  });
+};
+
+const saveToppings = (id, toppings, cb) => {
+  for (let topping of toppings) {
+    connection.query('INSERT INTO pizzas_toppings (pizza_id, topping_id) VALUES(?, ?)', [id, topping], (err, results, fields) => {
+      if (err) {
+        console.log(err);
+        cb(err, null);
+      }
+    });
+  }
+};
+
+module.exports.model = { savePizza, getSizes, getCrusts, getToppings, getPizzas, saveToppings };
 

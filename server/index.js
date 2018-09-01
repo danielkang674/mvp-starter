@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { model } = require('../database-mysql');
 const { getPizzaOptions } = require('../helpers/pizzaOptions.js');
+const { savePizza } = require('../helpers/savePizza.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -28,12 +29,27 @@ app.get('/vote', (req, res) => {
 });
 
 app.post('/vote', (req, res) => {
-  model.saveSize(req.body.size, (err, msg) => {
+  let { size, crust, toppings } = req.body.vote;
+  if (size === null || crust === null || toppings.length < 1) {
+    res.sendStatus(400);
+  }
+  savePizza(size, crust, toppings, (err, data) => {
     if (err) {
       console.log(err);
       res.sendStatus(500);
     } else {
-      res.status(200).send(msg);
+      res.send(data);
+    }
+  });
+});
+
+app.get('/pizzas', (req, res) => {
+  model.getPizzas((err, pizzas) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.json(pizzas);
     }
   });
 });

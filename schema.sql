@@ -60,7 +60,6 @@ DROP TABLE IF EXISTS `pizzas`;
 		
 CREATE TABLE `pizzas` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `name` CHAR(255) NOT NULL,
   `size_id` INTEGER NOT NULL,
   `crust_id` INTEGER NOT NULL,
   PRIMARY KEY (`id`)
@@ -130,7 +129,7 @@ INSERT INTO `toppings` (`topping`) VALUES ('green peppers');
 INSERT INTO `toppings` (`topping`) VALUES ('spinach');
 INSERT INTO `toppings` (`topping`) VALUES ('roasted red peppers');
 
-INSERT INTO `pizzas` (`name`,`size_id`,`crust_id`) VALUES ('BEST PIZZA','1','1');
+INSERT INTO `pizzas` (`size_id`,`crust_id`) VALUES ('1','1');
 
 -- INSERT INTO `pizzas_toppings` (`id`,`pizza_id`,`topping_id`) VALUES ('','','');
 

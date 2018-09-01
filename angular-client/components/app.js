@@ -7,10 +7,13 @@ angular.module('app')
       this.bye = bye;
     });
     this.getVote = (vote) => {
-      console.log(vote);
+      pizzaService.send(vote);
     };
     getPizzaOptions.getPizzaOptions((options) => {
       this.options = options;
+    });
+    pizzaService.getAllPizzas((pizzas) => {
+      this.pizzas = pizzas;
     });
   }])
   .component('app', {
