@@ -32,15 +32,17 @@ app.post('/vote', (req, res) => {
   let { size, crust, toppings } = req.body.vote;
   if (size === null || crust === null || toppings.length < 1) {
     res.sendStatus(400);
+    return;
+  } else {
+    savePizza(size, crust, toppings, (err, data) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.send(data);
+      }
+    });
   }
-  savePizza(size, crust, toppings, (err, data) => {
-    if (err) {
-      console.log(err);
-      res.sendStatus(500);
-    } else {
-      res.send(data);
-    }
-  });
 });
 
 app.get('/pizzas', (req, res) => {
