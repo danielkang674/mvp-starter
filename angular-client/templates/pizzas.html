@@ -1,6 +1,6 @@
 <div>
   <h4>Pizzas</h4>
   <ul>
-    {{$ctrl.pizzas}}
+    <li ng-repeat="pizza in $ctrl.pizzas">{{pizza.size}} {{pizza.crust}} with {{pizza.toppings.join(', ')}}</li>
   </ul>
 </div>
