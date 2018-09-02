@@ -11,8 +11,9 @@ angular.module('app')
         toppings: []
       };
       this.vote = () => {
-        this.getVote(this.data);
-
+        let { size, crust, toppings } = this.data;
+        this.getVote({ size, crust, toppings });
+        this.reset();
       };
       this.reset = () => {
         this.data.size = null;

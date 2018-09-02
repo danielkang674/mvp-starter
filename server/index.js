@@ -5,7 +5,8 @@ const cors = require('cors');
 const { model } = require('../database-mysql');
 const { getPizzaOptions } = require('../helpers/pizzaOptions.js');
 const { savePizza } = require('../helpers/savePizza.js');
-const { getPizzas } = require('../helpers/getPizzas.js');
+const { getPizzas, filterPizzas } = require('../helpers/getPizzas.js').getPizzas;
+const { topFour } = require('../helpers/chooseWinner.js').chooseWinner;
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -40,21 +41,32 @@ app.post('/vote', (req, res) => {
         console.log(err);
         res.sendStatus(500);
       } else {
-        res.end();
+        res.end(data);
       }
     });
   }
 });
 
 app.get('/pizzas', (req, res) => {
-  getPizzas((err, data, filteredData) => {
+  getPizzas((err, data) => {
     if (err) {
       console.log(err);
       res.sendStatus(500);
     } else {
-      res.json(filteredData);
+      res.json(data);
     }
   });
+});
+
+app.get('/winner', (req, res) => {
+  getPizzas((err, data) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.json(topFour(data));
+    }
+  })
 });
 
 app.listen(port, () => {

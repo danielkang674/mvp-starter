@@ -11,7 +11,7 @@ const savePizza = (size, crust, toppings, cb) => {
           console.log(err);
           cb(err, null);
         } else {
-          cb(null);
+          cb(null, 'Successfully voted!');
         }
       });
     }

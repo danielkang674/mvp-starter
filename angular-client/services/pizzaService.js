@@ -7,7 +7,10 @@ angular.module('app')
         data: { vote: vote }
       })
         .then(function ({ data }) {
-          return cb();
+          console.log(data);
+        })
+        .then(function () {
+          cb();
         })
         .catch(function (err) {
           console.log(err);

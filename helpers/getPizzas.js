@@ -6,7 +6,7 @@ const getPizzas = (cb) => {
       console.log(err);
       cb(err, null);
     } else {
-      cb(null, pizzas, filterPizzas(pizzas));
+      cb(null, filterPizzas(pizzas));
     }
   });
 };
@@ -24,4 +24,4 @@ const filterPizzas = (pizzas) => {
   return obj;
 };
 
-module.exports.getPizzas = getPizzas;
+module.exports.getPizzas = { getPizzas, filterPizzas };
