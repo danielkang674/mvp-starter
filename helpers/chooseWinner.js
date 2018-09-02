@@ -1,22 +1,57 @@
 const topFour = (data) => {
-  return sizeAndCrust(data);
+  let result = reduceOptions(data);
+  return result;
 };
 
-const sizeAndCrust = (data) => {
-  let obj = {};
+const reduceOptions = (data) => {
+  let getSum = sumOptions(data);
+  let sizeCrustCompared = compareSizeCrust(getSum);
+  return sizeCrustCompared;
+};
+
+const sumOptions = (data) => {
+  let sum = { size: {}, crust: {}, toppings: {} };
+  let tempToppings = [];
+  // sum of size and crust
   for (let key in data) {
-    if (!obj[data[key].size]) {
-      obj[data[key].size] = 1;
+    if (!sum.size[data[key].size]) {
+      sum.size[data[key].size] = 1;
     }
-    if (!obj[data[key].crust]) {
-      obj[data[key].crust] = 1;
+    if (!sum.crust[data[key].crust]) {
+      sum.crust[data[key].crust] = 1;
     }
     else {
-      obj[data[key].size]++;
-      obj[data[key].crust]++;
+      sum.size[data[key].size]++;
+      sum.crust[data[key].crust]++;
+      tempToppings = tempToppings.concat(data[key].toppings);
     }
   }
-  return obj;
-}
+  // sum toppings
+  for (let i = 0; i < tempToppings.length; i++) {
+    if (!sum.toppings[tempToppings[i]]) {
+      sum.toppings[tempToppings[i]] = 1;
+    } else {
+      sum.toppings[tempToppings[i]]++;
+    }
+  }
+  return sum;
+};
+
+const compareSizeCrust = (sum) => {
+  // compare size and crust but not toppings
+  let result = { toppings: sum.toppings };
+  for (let key in sum) {
+    if (key !== 'toppings') {
+      let counter = 0;
+      for (let option in sum[key]) {
+        if (sum[key][option] > counter) {
+          counter = sum[key][option];
+          result[key] = option;
+        }
+      }
+    }
+  }
+  return result;
+};
 
 module.exports.chooseWinner = { topFour };
