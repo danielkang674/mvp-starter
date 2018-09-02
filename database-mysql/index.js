@@ -1,11 +1,5 @@
 const mysql = require('mysql');
-// const options = {
-//   host: process.env.JAWSDB_HOST || 'localhost',
-//   user: process.env.JAWSDB_USERNAME || 'root',
-//   password: process.env.JAWSDB_PASSWORD || process.env.MYSQL_PASS,
-//   database: process.env.JAWSDB_DATABASE || 'test',
-//   port: process.env.JAWSDB_PORT
-// };
+
 const options = process.env.JAWSDB_URL || { host: 'localhost', user: 'root', password: process.env.MYSQL_PASS, database: 'u4yd16p0ho7f8tgn' };
 
 const connection = mysql.createConnection(options);
@@ -20,6 +14,7 @@ const savePizza = (size, crust, cb) => {
     }
   })
 };
+
 
 const getSizes = (cb) => {
   connection.query('SELECT * FROM sizes', (err, results, fields) => {
@@ -43,6 +38,7 @@ const getCrusts = (cb) => {
   });
 };
 
+
 const getToppings = (cb) => {
   connection.query('SELECT * FROM toppings', (err, results, fields) => {
     if (err) {
@@ -55,7 +51,7 @@ const getToppings = (cb) => {
 };
 
 const getPizzas = (cb) => {
-  connection.query('SELECT * FROM pizzas', (err, results, fields) => {
+  connection.query('select p.id, s.size, c.crust, t.topping from pizzas_toppings as p_t, pizzas as p, sizes as s, crusts as c, toppings as t where p_t.pizza_id = p.id and s.id = p.size_id and p.crust_id = c.id and p_t.topping_id = t.id;', (err, results, fields) => {
     if (err) {
       console.log(err);
       cb(err, null);

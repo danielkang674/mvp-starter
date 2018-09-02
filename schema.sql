@@ -129,9 +129,6 @@ INSERT INTO `toppings` (`topping`) VALUES ('green peppers');
 INSERT INTO `toppings` (`topping`) VALUES ('spinach');
 INSERT INTO `toppings` (`topping`) VALUES ('roasted red peppers');
 
-INSERT INTO `pizzas` (`size_id`,`crust_id`) VALUES ('1','1');
-
--- INSERT INTO `pizzas_toppings` (`id`,`pizza_id`,`topping_id`) VALUES ('','','');
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < schema.sql -p

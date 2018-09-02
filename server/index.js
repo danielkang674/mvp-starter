@@ -5,6 +5,7 @@ const cors = require('cors');
 const { model } = require('../database-mysql');
 const { getPizzaOptions } = require('../helpers/pizzaOptions.js');
 const { savePizza } = require('../helpers/savePizza.js');
+const { getPizzas } = require('../helpers/getPizzas.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -46,12 +47,12 @@ app.post('/vote', (req, res) => {
 });
 
 app.get('/pizzas', (req, res) => {
-  model.getPizzas((err, pizzas) => {
+  getPizzas((err, data, filteredData) => {
     if (err) {
       console.log(err);
       res.sendStatus(500);
     } else {
-      res.json(pizzas);
+      res.send(filteredData);
     }
   });
 });
