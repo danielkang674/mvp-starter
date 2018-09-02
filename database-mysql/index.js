@@ -67,6 +67,8 @@ const saveToppings = (id, toppings, cb) => {
       if (err) {
         console.log(err);
         cb(err, null);
+      } else {
+        cb(null);
       }
     });
   }

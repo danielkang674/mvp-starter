@@ -1,13 +1,13 @@
 angular.module('app')
   .service('pizzaService', function ($http) {
-    this.send = function (vote) {
+    this.send = function (vote, cb) {
       $http({
         method: "POST",
         url: "/vote",
         data: { vote: vote }
       })
         .then(function ({ data }) {
-          console.log(data);
+          return cb();
         })
         .catch(function (err) {
           console.log(err);

@@ -40,7 +40,7 @@ app.post('/vote', (req, res) => {
         console.log(err);
         res.sendStatus(500);
       } else {
-        res.send(data);
+        res.end();
       }
     });
   }

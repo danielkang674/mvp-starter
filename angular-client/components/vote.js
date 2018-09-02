@@ -9,7 +9,17 @@ angular.module('app')
         size: null,
         crust: null,
         toppings: []
-      }
+      };
+      this.vote = () => {
+        this.getVote(this.data);
+
+      };
+      this.reset = () => {
+        this.data.size = null;
+        this.data.crust = null;
+        this.data.toppings = [];
+      };
+      console.log(this);
     },
     templateUrl: '/templates/vote.html'
   });

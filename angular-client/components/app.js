@@ -7,7 +7,7 @@ angular.module('app')
       this.bye = bye;
     });
     this.getVote = (vote) => {
-      pizzaService.send(vote);
+      pizzaService.send(vote, this.renderAfterVote);
     };
     getPizzaOptions.getPizzaOptions((options) => {
       this.options = options;
@@ -15,6 +15,11 @@ angular.module('app')
     pizzaService.getAllPizzas((pizzas) => {
       this.pizzas = pizzas;
     });
+    this.renderAfterVote = () => {
+      pizzaService.getAllPizzas((pizzas) => {
+        this.pizzas = pizzas;
+      });
+    };
   }])
   .component('app', {
     bindings: {},
