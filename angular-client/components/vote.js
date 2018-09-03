@@ -20,7 +20,6 @@ angular.module('app')
         this.data.crust = null;
         this.data.toppings = [];
       };
-      console.log(this);
     },
     templateUrl: '/templates/vote.html'
   });

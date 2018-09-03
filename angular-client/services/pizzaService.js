@@ -19,7 +19,7 @@ angular.module('app')
     this.getAllPizzas = function (cb) {
       $http({
         method: "GET",
-        url: "/pizzas",
+        url: "/pizzas"
       })
         .then(function ({ data }) {
           if (cb) cb(data);
@@ -27,5 +27,17 @@ angular.module('app')
         .catch(function (err) {
           console.log(err);
         });
-    }
+    };
+    this.getPopularVote = function (cb) {
+      $http({
+        method: "GET",
+        url: "/winner"
+      })
+        .then(function ({ data }) {
+          if (cb) cb(data);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    };
   });

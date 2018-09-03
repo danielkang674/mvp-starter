@@ -1,11 +1,10 @@
 angular.module('app')
-  .controller('AppCtrl', ['itemsService', 'bye', 'pizzaService', 'getPizzaOptions', function (itemsService, bye, pizzaService, getPizzaOptions) {
-    itemsService.sayhi((hi) => {
-      this.hi = hi;
-    });
-    bye.saybye((bye) => {
-      this.bye = bye;
-    });
+  .controller('AppCtrl', ['pizzaService', 'getPizzaOptions', function (pizzaService, getPizzaOptions) {
+    this.getWinner = () => {
+      pizzaService.getPopularVote((winner) => {
+        this.winner = winner;
+      });
+    };
     this.getVote = (vote) => {
       pizzaService.send(vote, this.renderAfterVote);
     };
@@ -20,6 +19,7 @@ angular.module('app')
         this.pizzas = pizzas;
       });
     };
+    pizzaService.getPopularVote
   }])
   .component('app', {
     bindings: {},

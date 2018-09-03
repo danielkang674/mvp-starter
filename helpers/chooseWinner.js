@@ -1,5 +1,19 @@
-const topFour = (data) => {
+const popularVote = (data) => {
   let result = reduceOptions(data);
+  let toppingsArr = [];
+  let topFour = [];
+  for (let topping in result.toppings) {
+    let tempObj = { value: result.toppings[topping], topping: topping };
+    toppingsArr.push(tempObj);
+  }
+  toppingsArr.sort((a, b) => {
+    return b.value - a.value;
+  });
+  let length = toppingsArr.length > 4 ? 4 : toppingsArr.length;
+  for (let i = 0; i < length; i++) {
+    topFour.push(toppingsArr[i].topping);
+  }
+  result.toppings = topFour
   return result;
 };
 
@@ -56,4 +70,4 @@ const compareSizeCrust = (sum) => {
   return result;
 };
 
-module.exports.chooseWinner = { topFour };
+module.exports.chooseWinner = { popularVote };

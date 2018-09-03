@@ -6,7 +6,8 @@ const { model } = require('../database-mysql');
 const { getPizzaOptions } = require('../helpers/pizzaOptions.js');
 const { savePizza } = require('../helpers/savePizza.js');
 const { getPizzas, filterPizzas } = require('../helpers/getPizzas.js').getPizzas;
-const { topFour } = require('../helpers/chooseWinner.js').chooseWinner;
+const { popularVote } = require('../helpers/chooseWinner.js').chooseWinner;
+const morgan = require('morgan');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(morgan('combined'));
 
 app.use(express.static(__dirname + '/../angular-client'));
 app.use(express.static(__dirname + '/../node_modules'));
@@ -64,7 +66,7 @@ app.get('/winner', (req, res) => {
       console.log(err);
       res.sendStatus(500);
     } else {
-      res.json(topFour(data));
+      res.json(popularVote(data));
     }
   })
 });
