@@ -14,17 +14,19 @@ const sumOptions = (data) => {
   let tempToppings = [];
   // sum of size and crust
   for (let key in data) {
+    let incrementSize = true;
+    let incrementCrust = true;
     tempToppings = tempToppings.concat(data[key].toppings);
     if (!sum.size[data[key].size]) {
       sum.size[data[key].size] = 1;
+      incrementSize = false;
     }
     if (!sum.crust[data[key].crust]) {
       sum.crust[data[key].crust] = 1;
+      incrementCrust = false;
     }
-    else {
-      sum.size[data[key].size]++;
-      sum.crust[data[key].crust]++;
-    }
+    if (incrementSize) sum.size[data[key].size]++;
+    if (incrementCrust) sum.crust[data[key].crust]++;
   }
   // sum toppings
   for (let i = 0; i < tempToppings.length; i++) {
