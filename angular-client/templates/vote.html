@@ -1,18 +1,32 @@
-<div>
+<div class="border border-primary p-3">
   <h4>Vote it your way!</h4>
   <form>
-    <select ng-model="$ctrl.data.size">
-      <option value="">---Choose a size---</option>
-      <option ng-repeat="size in $ctrl.options.sizes" ng-value={{size.id}}>{{size.size}}</option>
-    </select>
-    <select ng-model="$ctrl.data.crust">
-      <option value="">--Choose a crust---</option>
-      <option ng-repeat="crust in $ctrl.options.crusts" ng-value={{crust.id}}>{{crust.crust}}</option>
-    </select>
-    <p>Hold down ctrl/cmd to select as many toppings as you want!</p>
-    <select ng-model="$ctrl.data.toppings" size="10" multiple>
-      <option ng-repeat="topping in $ctrl.options.toppings" ng-value={{topping.id}}>{{topping.topping}}</option>
-    </select>
-    <input type="submit" value="Submit Vote" ng-click="$ctrl.vote()"></input>
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <select ng-model="$ctrl.data.size" class="form-control">
+          <option value="">---Choose a size---</option>
+          <option ng-repeat="size in $ctrl.options.sizes" ng-value={{size.id}}>{{size.size}}</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <select ng-model="$ctrl.data.crust" class="form-control">
+          <option value="">--Choose a crust---</option>
+          <option ng-repeat="crust in $ctrl.options.crusts" ng-value={{crust.id}}>{{crust.crust}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label>Hold down ctrl/cmd to select as many toppings as you want!</label>
+        <select class="form-control" ng-model="$ctrl.data.toppings" size="10" multiple>
+          <option ng-repeat="topping in $ctrl.options.toppings" ng-value={{topping.id}}>{{topping.topping}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row align-items-center">
+      <div class="col-auto mt-1">
+        <input class="form-control" type="submit" value="Submit Vote" ng-click="$ctrl.vote()"></input>
+      </div>
+    </div>
   </form>
 </div>
