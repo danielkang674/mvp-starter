@@ -19,7 +19,10 @@ angular.module('app')
         this.pizzas = pizzas;
       });
     };
-    pizzaService.getPopularVote
+    this.deleteVotes = () => {
+      pizzaService.deleteVotes(this.renderAfterVote);
+      this.winner = '';
+    };
   }])
   .component('app', {
     bindings: {},

@@ -74,5 +74,27 @@ const saveToppings = (id, toppings, cb) => {
   }
 };
 
-module.exports.model = { savePizza, getSizes, getCrusts, getToppings, getPizzas, saveToppings };
+const deletePT = (cb) => {
+  connection.query('DELETE FROM pizzas_toppings WHERE id > 0', (err, results, fields) => {
+    if (err) {
+      console.log(err);
+      cb(err, null);
+    } else {
+      cb(null);
+    }
+  });
+};
+
+const deletePizzas = (cb) => {
+  connection.query('DELETE FROM pizzas WHERE id > 0', (err, results, fields) => {
+    if (err) {
+      console.log(err);
+      cb(err, null);
+    } else {
+      cb(null);
+    }
+  })
+};
+
+module.exports.model = { savePizza, getSizes, getCrusts, getToppings, getPizzas, saveToppings, deletePT, deletePizzas };
 

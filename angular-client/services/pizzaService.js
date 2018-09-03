@@ -40,4 +40,19 @@ angular.module('app')
           console.log(err);
         });
     };
+    this.deleteVotes = function (cb) {
+      $http({
+        method: "GET",
+        url: "/delete"
+      })
+        .then(function ({ data }) {
+          console.log(data);
+        })
+        .then(function () {
+          cb();
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    }
   });

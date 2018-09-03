@@ -1,8 +1,7 @@
 <div>
   <div style="margin-top: 20px">
     <vote options="$ctrl.options" get-vote="$ctrl.getVote"></vote>
-    <button ng-click="$ctrl.getWinner()">Show winner</button>
-    <h3>Winner is: {{$ctrl.winner.size}} {{$ctrl.winner.crust}} {{$ctrl.winner.toppings.join(', ')}}</h3>
+    <winner winner="$ctrl.winner" get-winner="$ctrl.getWinner" delete-votes="$ctrl.deleteVotes"></winner>
     <pizzas pizzas="$ctrl.pizzas"></pizzas>
   </div>
 </div>

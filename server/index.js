@@ -8,6 +8,7 @@ const { savePizza } = require('../helpers/savePizza.js');
 const { getPizzas, filterPizzas } = require('../helpers/getPizzas.js').getPizzas;
 const { popularVote } = require('../helpers/chooseWinner.js').chooseWinner;
 const morgan = require('morgan');
+const { deleteVotes } = require('../helpers/deleteVotes.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,7 +17,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 
 app.use(express.static(__dirname + '/../angular-client'));
 app.use(express.static(__dirname + '/../node_modules'));
@@ -67,6 +68,17 @@ app.get('/winner', (req, res) => {
       res.sendStatus(500);
     } else {
       res.json(popularVote(data));
+    }
+  })
+});
+
+app.get('/delete', (req, res) => {
+  deleteVotes((err) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.send('deleted votes');
     }
   })
 });
