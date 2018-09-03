@@ -1,5 +1,6 @@
 <div>
   <h4>Pizzas</h4>
+  <button ng-click="$ctrl.showAllVotes()">Show more pizza votes</button>
   <ul>
     <li ng-repeat="pizza in $ctrl.pizzas">{{pizza.size}} {{pizza.crust}} with {{pizza.toppings.join(', ')}}</li>
   </ul>
