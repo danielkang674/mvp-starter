@@ -14,6 +14,7 @@ const sumOptions = (data) => {
   let tempToppings = [];
   // sum of size and crust
   for (let key in data) {
+    tempToppings = tempToppings.concat(data[key].toppings);
     if (!sum.size[data[key].size]) {
       sum.size[data[key].size] = 1;
     }
@@ -23,7 +24,6 @@ const sumOptions = (data) => {
     else {
       sum.size[data[key].size]++;
       sum.crust[data[key].crust]++;
-      tempToppings = tempToppings.concat(data[key].toppings);
     }
   }
   // sum toppings
