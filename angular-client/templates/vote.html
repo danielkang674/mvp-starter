@@ -1,4 +1,4 @@
-<div class="border border-primary p-3">
+<div class="border border-primary p-3" style="max-width: 450px;">
   <h4>Vote it your way!</h4>
   <form>
     <div class="form-row align-items-center">
@@ -17,8 +17,8 @@
     </div>
     <div class="form-row align-items-center">
       <div class="col-auto">
-        <label>Hold down ctrl/cmd to select as many toppings as you want!</label>
-        <select class="form-control" ng-model="$ctrl.data.toppings" size="10" multiple>
+        <p>Hold ctrl/cmd to select multiple toppings</p>
+        <select style="max-width: 500px" class="form-control" ng-model="$ctrl.data.toppings" size="10" multiple>
           <option ng-repeat="topping in $ctrl.options.toppings" ng-value={{topping.id}}>{{topping.topping}}</option>
         </select>
       </div>
